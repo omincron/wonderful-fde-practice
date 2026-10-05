@@ -1,0 +1,16 @@
+{
+  "name": "wonderful-fde-practice",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "demo": "node src/cli.mjs",
+    "test": "node --test test/*.test.mjs",
+    "evaluate": "node src/evaluate.mjs",
+    "demo:ai": "node src/cli.mjs --ollama",
+    "test:exercise": "node --test exercises/returns.test.mjs"
+  }
+}
