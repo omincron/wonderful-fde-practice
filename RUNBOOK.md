@@ -14,6 +14,15 @@ npm run evaluate                            # 16 acceptance cases, mock mode
 npm run demo:ai -- "Where is order A-1001?" # optional: local Ollama model (qwen3:4b) must be running
 ```
 
+With Docker (runs the mock evaluation in a container and prints the report; verified locally on 2026-10-05: 16/16, exit code 0):
+
+```sh
+docker build -t zone01-fde-demo .
+docker run --rm zone01-fde-demo
+```
+
+The container does not keep the report on the host; use `npm run evaluate` locally or the CI artifact for a saved copy.
+
 ## 2. Where the reports are
 
 | Command | Report |
@@ -23,7 +32,7 @@ npm run demo:ai -- "Where is order A-1001?" # optional: local Ollama model (qwen
 | `npm run evaluate -- --ollama` | `output/evaluation-live.json` |
 | GitHub CI (every push) | **Actions** tab → run → artifact `mock-evaluation` (kept 3 days) |
 
-`output/` is not committed to git. Each result contains `outcome`, `requestId`, `toolCalls`, `latencyMs` and a `trace` of tool calls.
+`output/` is not committed to git. A saved copy of the final mock evaluation is kept in `reports/evaluation-mock-16of16.json`. Each result contains `outcome`, `requestId`, `toolCalls`, `latencyMs` and a `trace` of tool calls.
 
 ## 3. Which outcomes need a human
 
