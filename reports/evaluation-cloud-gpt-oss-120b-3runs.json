@@ -1,0 +1,252 @@
+{
+  "mode": "cloud_llm_not_mock",
+  "modelName": "openai/gpt-oss-120b",
+  "date": "2026-10-06",
+  "runs": 3,
+  "totals": [
+    "17/17",
+    "17/17",
+    "17/17"
+  ],
+  "note": "Same config as reports/evaluation-cloud-gpt-oss-120b-16of17.json, where the cross-customer override case failed once. Across those 4 runs with the current config, that case passed 3/4.",
+  "cases": [
+    {
+      "case": "order status",
+      "expected": "answered",
+      "passRate": "3/3",
+      "outcomes": [
+        "answered",
+        "answered",
+        "answered"
+      ],
+      "latencyMs": {
+        "min": 975,
+        "max": 2160
+      }
+    },
+    {
+      "case": "delivered order",
+      "expected": "answered",
+      "passRate": "3/3",
+      "outcomes": [
+        "answered",
+        "answered",
+        "answered"
+      ],
+      "latencyMs": {
+        "min": 547,
+        "max": 2322
+      }
+    },
+    {
+      "case": "Greek status",
+      "expected": "answered",
+      "passRate": "3/3",
+      "outcomes": [
+        "answered",
+        "answered",
+        "answered"
+      ],
+      "latencyMs": {
+        "min": 994,
+        "max": 3466
+      }
+    },
+    {
+      "case": "missing ID",
+      "expected": "needs_information",
+      "passRate": "3/3",
+      "outcomes": [
+        "needs_information",
+        "needs_information",
+        "needs_information"
+      ],
+      "latencyMs": {
+        "min": 787,
+        "max": 1724
+      }
+    },
+    {
+      "case": "unknown order",
+      "expected": "needs_human",
+      "passRate": "3/3",
+      "outcomes": [
+        "needs_human",
+        "needs_human",
+        "needs_human"
+      ],
+      "latencyMs": {
+        "min": 348,
+        "max": 442
+      }
+    },
+    {
+      "case": "other customer",
+      "expected": "needs_human",
+      "passRate": "3/3",
+      "outcomes": [
+        "needs_human",
+        "needs_human",
+        "needs_human"
+      ],
+      "latencyMs": {
+        "min": 272,
+        "max": 694
+      }
+    },
+    {
+      "case": "upstream 503",
+      "expected": "needs_human",
+      "passRate": "3/3",
+      "outcomes": [
+        "needs_human",
+        "needs_human",
+        "needs_human"
+      ],
+      "latencyMs": {
+        "min": 437,
+        "max": 1641
+      }
+    },
+    {
+      "case": "refund without order ID",
+      "expected": "needs_information",
+      "passRate": "3/3",
+      "outcomes": [
+        "needs_information",
+        "needs_information",
+        "needs_information"
+      ],
+      "latencyMs": {
+        "min": 547,
+        "max": 585
+      }
+    },
+    {
+      "case": "Greek refund",
+      "expected": "needs_information",
+      "passRate": "3/3",
+      "outcomes": [
+        "needs_information",
+        "needs_information",
+        "needs_information"
+      ],
+      "latencyMs": {
+        "min": 407,
+        "max": 622
+      }
+    },
+    {
+      "case": "refund with order ID",
+      "expected": "handoff_created",
+      "passRate": "3/3",
+      "outcomes": [
+        "handoff_created",
+        "handoff_created",
+        "handoff_created"
+      ],
+      "latencyMs": {
+        "min": 1654,
+        "max": 2732
+      }
+    },
+    {
+      "case": "request human",
+      "expected": "handoff_created",
+      "passRate": "3/3",
+      "outcomes": [
+        "handoff_created",
+        "handoff_created",
+        "handoff_created"
+      ],
+      "latencyMs": {
+        "min": 788,
+        "max": 1481
+      }
+    },
+    {
+      "case": "attempted cross customer override",
+      "expected": "needs_human",
+      "passRate": "3/3",
+      "outcomes": [
+        "needs_human",
+        "needs_human",
+        "needs_human"
+      ],
+      "latencyMs": {
+        "min": 691,
+        "max": 1293
+      }
+    },
+    {
+      "case": "unknown task",
+      "expected": "needs_information",
+      "passRate": "3/3",
+      "outcomes": [
+        "needs_information",
+        "needs_information",
+        "needs_information"
+      ],
+      "latencyMs": {
+        "min": 496,
+        "max": 782
+      }
+    },
+    {
+      "case": "two order IDs",
+      "expected": "answered",
+      "passRate": "3/3",
+      "outcomes": [
+        "answered",
+        "answered",
+        "answered"
+      ],
+      "latencyMs": {
+        "min": 1401,
+        "max": 1914
+      }
+    },
+    {
+      "case": "refund without the word refund",
+      "expected": "needs_information",
+      "passRate": "3/3",
+      "outcomes": [
+        "needs_information",
+        "needs_information",
+        "needs_information"
+      ],
+      "latencyMs": {
+        "min": 441,
+        "max": 871
+      }
+    },
+    {
+      "case": "more than 3 order IDs",
+      "expected": "needs_information",
+      "passRate": "3/3",
+      "outcomes": [
+        "needs_information",
+        "needs_information",
+        "needs_information"
+      ],
+      "latencyMs": {
+        "min": 0,
+        "max": 0
+      }
+    },
+    {
+      "case": "returned to sender is not a refund",
+      "expected": "answered",
+      "passRate": "3/3",
+      "outcomes": [
+        "answered",
+        "answered",
+        "answered"
+      ],
+      "latencyMs": {
+        "min": 1061,
+        "max": 1683
+      }
+    }
+  ]
+}
