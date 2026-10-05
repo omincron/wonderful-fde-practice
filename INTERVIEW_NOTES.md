@@ -36,5 +36,7 @@
   - Limitation: "the courier said it will return to the depot" still matches. Keywords can't detect intent; in production that is the LLM's job, guarded by checks in code.
 - Μία πρακτική βελτίωση για pilot, ποιος θα την εγκρίνει και πώς θα κάνεις rollback.
   - Improvement: record every HTTP attempt in the trace (e.g. `attempts: 2, lastStatus: 503`). Expected change: for "upstream 503" the report would show 2 attempts instead of looking like 1 call, so monitoring can tell "down" from "flaky" and count real calls against rate limits.
+  - Approval: an internal logging change, so the technical owner (Kostas) approves it through code review and a green CI run. Customers see no difference, so the business owner (Maria) is informed, not asked.
+  - Rollback: `git revert <commit>`, run the tests, push, and confirm CI is green (see `RUNBOOK.md`).
 
 Demo 5 λεπτών: ανάγκη → αρχιτεκτονική → επιτυχημένο αίτημα → αποτυχία → evaluation → επόμενο βήμα.
