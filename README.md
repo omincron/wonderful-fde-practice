@@ -7,7 +7,7 @@ Built on the Zone01 starter (original instructions below, in Greek). Synthetic d
 - **Discovery:** scoped a vague "automate everything" request to an order-status pilot. See [CUSTOMER_BRIEF.md](CUSTOMER_BRIEF.md).
 - **Business rule:** implemented `returnEligibility` (7/7 exercise tests), stricter than the reference.
 - **Evaluation:** added cases that failed (12/14), found that the agent silently dropped a second order ID, fixed it with a hard limit of 3 orders per message, and corrected an AI-written keyword change that created false refund tickets. Mock: 17/17; see [reports/](reports/).
-- **Live LLM:** added a cloud mode (`openai/gpt-oss-120b` on Groq). First live run 12/16; the failures led to an ID-format fix and a business decision (refunds without an order ID ask for it first). Now 16/17, and one case was not repeatable between runs.
+- **Live LLM:** added a cloud mode (`openai/gpt-oss-120b` on Groq). First live run 12/16; the failures led to an ID-format fix and a business decision (refunds without an order ID ask for it first). The next run gave 16/17 (one case failed once), so I repeated it: 17/17 in 3 more runs, with a pass rate per case in [reports/](reports/).
 - **Operations:** CI runs unit tests, exercise tests and evaluation on every push; Docker verified locally. See [RUNBOOK.md](RUNBOOK.md).
 - **Notes, findings and what AI did vs what I did:** [INTERVIEW_NOTES.md](INTERVIEW_NOTES.md).
 
