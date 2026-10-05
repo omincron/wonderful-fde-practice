@@ -1,9 +1,15 @@
 import { startApi } from './api.mjs';
 import { runAgent } from './agent.mjs';
-import { mockModel, ollamaModel } from './models.mjs';
+import { modelFromArgs } from './models.mjs';
 import { cases } from './cases.mjs';
 import { mkdir, writeFile } from 'node:fs/promises';
-const live = process.argv.includes('--ollama');
+const { model, mode, modelName } = modelFromArgs(process.argv);
+const live = mode !== 'deterministic_mock_not_llm';
+const reportFile =
+  {
+    cloud_llm: 'output/evaluation-cloud.json',
+    local_llm: 'output/evaluation-live.json',
+  }[mode] ?? 'output/evaluation-mock.json';
 const rows = [];
 const api = await startApi();
 try {
@@ -11,8 +17,10 @@ try {
     const r = await runAgent(c.message, {
       url: api.url,
       requestId: 'eval-' + i,
-      model: live ? ollamaModel() : mockModel(),
+      model,
     });
+    // Stay under free-tier rate limits (about 30 requests per minute) during cloud runs.
+    if (mode === 'cloud_llm') await new Promise((resolve) => setTimeout(resolve, 3000));
     const pass =
       r.outcome === c.outcome &&
       (!c.includes || r.answer.includes(c.includes)) &&
@@ -28,7 +36,8 @@ try {
     });
   }
   const report = {
-    mode: live ? 'local_llm_not_mock' : 'mock_regression_not_llm_quality',
+    mode: live ? mode + '_not_mock' : 'mock_regression_not_llm_quality',
+    modelName,
     passed: rows.filter((r) => r.pass).length,
     total: rows.length,
     answerRate: rows.filter((r) => r.actual === 'answered').length / rows.length,
@@ -36,10 +45,7 @@ try {
     rows,
   };
   await mkdir('output', { recursive: true });
-  await writeFile(
-    live ? 'output/evaluation-live.json' : 'output/evaluation-mock.json',
-    JSON.stringify(report, null, 2),
-  );
+  await writeFile(reportFile, JSON.stringify(report, null, 2));
   console.log(JSON.stringify(report, null, 2));
   if (report.passed !== report.total) process.exitCode = 1;
 } finally {

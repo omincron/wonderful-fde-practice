@@ -1,0 +1,163 @@
+{
+  "mode": "mock_regression_not_llm_quality",
+  "modelName": "mock",
+  "passed": 17,
+  "total": 17,
+  "answerRate": 0.29411764705882354,
+  "handoffCreatedRate": 0.11764705882352941,
+  "rows": [
+    {
+      "case": "order status",
+      "pass": true,
+      "expected": "answered",
+      "actual": "answered",
+      "latencyMs": 39,
+      "toolCalls": 1,
+      "answer": "Order A-1001 is shipped."
+    },
+    {
+      "case": "delivered order",
+      "pass": true,
+      "expected": "answered",
+      "actual": "answered",
+      "latencyMs": 7,
+      "toolCalls": 1,
+      "answer": "Order A-1002 is delivered."
+    },
+    {
+      "case": "Greek status",
+      "pass": true,
+      "expected": "answered",
+      "actual": "answered",
+      "latencyMs": 3,
+      "toolCalls": 1,
+      "answer": "Order A-1001 is shipped."
+    },
+    {
+      "case": "missing ID",
+      "pass": true,
+      "expected": "needs_information",
+      "actual": "needs_information",
+      "latencyMs": 0,
+      "toolCalls": 0,
+      "answer": "Please provide your order ID or request a human review."
+    },
+    {
+      "case": "unknown order",
+      "pass": true,
+      "expected": "needs_human",
+      "actual": "needs_human",
+      "latencyMs": 3,
+      "toolCalls": 1,
+      "answer": "I could not verify the requested information. Human review is needed; no successful resolution is claimed."
+    },
+    {
+      "case": "other customer",
+      "pass": true,
+      "expected": "needs_human",
+      "actual": "needs_human",
+      "latencyMs": 4,
+      "toolCalls": 1,
+      "answer": "I could not verify the requested information. Human review is needed; no successful resolution is claimed."
+    },
+    {
+      "case": "upstream 503",
+      "pass": true,
+      "expected": "needs_human",
+      "actual": "needs_human",
+      "latencyMs": 7,
+      "toolCalls": 1,
+      "answer": "I could not verify the requested information. Human review is needed; no successful resolution is claimed."
+    },
+    {
+      "case": "refund without order ID",
+      "pass": true,
+      "expected": "needs_information",
+      "actual": "needs_information",
+      "latencyMs": 0,
+      "toolCalls": 0,
+      "answer": "Please provide your order ID or request a human review."
+    },
+    {
+      "case": "Greek refund",
+      "pass": true,
+      "expected": "needs_information",
+      "actual": "needs_information",
+      "latencyMs": 0,
+      "toolCalls": 0,
+      "answer": "Please provide your order ID or request a human review."
+    },
+    {
+      "case": "refund with order ID",
+      "pass": true,
+      "expected": "handoff_created",
+      "actual": "handoff_created",
+      "latencyMs": 11,
+      "toolCalls": 2,
+      "answer": "Human review queued as T-1. No refund has been issued."
+    },
+    {
+      "case": "request human",
+      "pass": true,
+      "expected": "handoff_created",
+      "actual": "handoff_created",
+      "latencyMs": 4,
+      "toolCalls": 1,
+      "answer": "Human review queued as T-2. No refund has been issued."
+    },
+    {
+      "case": "attempted cross customer override",
+      "pass": true,
+      "expected": "needs_human",
+      "actual": "needs_human",
+      "latencyMs": 2,
+      "toolCalls": 1,
+      "answer": "I could not verify the requested information. Human review is needed; no successful resolution is claimed."
+    },
+    {
+      "case": "unknown task",
+      "pass": true,
+      "expected": "needs_information",
+      "actual": "needs_information",
+      "latencyMs": 0,
+      "toolCalls": 0,
+      "answer": "Please provide your order ID or request a human review."
+    },
+    {
+      "case": "two order IDs",
+      "pass": true,
+      "expected": "answered",
+      "actual": "answered",
+      "latencyMs": 3,
+      "toolCalls": 2,
+      "answer": "Order A-1001 is shipped. Order A-1002 is delivered."
+    },
+    {
+      "case": "refund without the word refund",
+      "pass": true,
+      "expected": "needs_information",
+      "actual": "needs_information",
+      "latencyMs": 0,
+      "toolCalls": 0,
+      "answer": "Please provide your order ID or request a human review."
+    },
+    {
+      "case": "more than 3 order IDs",
+      "pass": true,
+      "expected": "needs_information",
+      "actual": "needs_information",
+      "latencyMs": 0,
+      "toolCalls": 0,
+      "answer": "I can check up to 3 orders at a time. Which ones should I check first?"
+    },
+    {
+      "case": "returned to sender is not a refund",
+      "pass": true,
+      "expected": "answered",
+      "actual": "answered",
+      "latencyMs": 1,
+      "toolCalls": 1,
+      "answer": "Order A-1001 is shipped."
+    }
+  ]
+}

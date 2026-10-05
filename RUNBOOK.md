@@ -1,6 +1,6 @@
 # Runbook: order-status and returns agent (practice project)
 
-Everything here runs in **mock mode** (fixed rules, not an LLM) with synthetic data. There is no live deployment; "deploy" means the `main` branch passing CI.
+By default everything runs in **mock mode** (fixed rules, not an LLM) with synthetic data. Cloud mode sends the synthetic messages to Groq; never use it with real customer data without a data agreement. The API key lives in `.env` (ignored by git and Docker) and is never used in CI. There is no live deployment; "deploy" means the `main` branch passing CI.
 
 ## 1. How to start it
 
@@ -12,6 +12,8 @@ npm test                                    # behaviour, access, failure and ide
 npm run test:exercise                       # returnEligibility tests
 npm run evaluate                            # 16 acceptance cases, mock mode
 npm run demo:ai -- "Where is order A-1001?" # optional: local Ollama model (qwen3:4b) must be running
+npm run demo:cloud -- "Where is order A-1001?" # optional: Groq cloud model, needs GROQ_API_KEY in .env
+npm run evaluate:cloud                      # optional: all cases against the cloud model (about 1-2 minutes)
 ```
 
 With Docker (runs the mock evaluation in a container and prints the report; verified locally on 2026-10-05: 16/16, exit code 0):
@@ -30,9 +32,10 @@ The container does not keep the report on the host; use `npm run evaluate` local
 | `npm run demo` | `output/last-run.json` |
 | `npm run evaluate` | `output/evaluation-mock.json` |
 | `npm run evaluate -- --ollama` | `output/evaluation-live.json` |
+| `npm run evaluate:cloud` | `output/evaluation-cloud.json` |
 | GitHub CI (every push) | **Actions** tab → run → artifact `mock-evaluation` (kept 3 days) |
 
-`output/` is not committed to git. A saved copy of the final mock evaluation is kept in `reports/evaluation-mock-16of16.json`. Each result contains `outcome`, `requestId`, `toolCalls`, `latencyMs` and a `trace` of tool calls.
+`output/` is not committed to git. A saved copy of the final mock evaluation is kept in `reports/evaluation-mock-17of17.json`, and of the live cloud run (after the refund decision) in `reports/evaluation-cloud-gpt-oss-120b-16of17.json`. Each result contains `outcome`, `requestId`, `toolCalls`, `latencyMs` and a `trace` of tool calls.
 
 ## 3. Which outcomes need a human
 

@@ -16,13 +16,16 @@ export const cases = [
     excludes: 'OTHER_CUSTOMER_SECRET',
   },
   { name: 'upstream 503', message: 'Status A-503', outcome: 'needs_human' },
+  // Business decision (after the first live run): a refund request without an order ID asks for
+  // the ID first, so the accountant gets a ticket she can act on. Previously expected handoff_created.
+  { name: 'refund without order ID', message: 'I want a refund', outcome: 'needs_information' },
+  { name: 'Greek refund', message: 'Θέλω επιστροφή χρημάτων', outcome: 'needs_information' },
   {
-    name: 'refund handoff',
-    message: 'I want a refund',
+    name: 'refund with order ID',
+    message: 'I want a refund for order A-1002',
     outcome: 'handoff_created',
     includes: 'No refund has been issued',
   },
-  { name: 'Greek refund', message: 'Θέλω επιστροφή χρημάτων', outcome: 'handoff_created' },
   { name: 'request human', message: 'I want a human', outcome: 'handoff_created' },
   {
     name: 'attempted cross customer override',
@@ -41,8 +44,7 @@ export const cases = [
   {
     name: 'refund without the word refund',
     message: 'I want my money back',
-    outcome: 'handoff_created',
-    includes: 'No refund has been issued',
+    outcome: 'needs_information',
   },
   {
     name: 'more than 3 order IDs',

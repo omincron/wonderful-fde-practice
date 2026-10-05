@@ -4,7 +4,7 @@ export const tools = [
     function: {
       name: 'get_order',
       description:
-        'Get the authenticated demo customer order. Ask for an ID if absent. Never invent an ID.',
+        'Get the authenticated demo customer order. Order IDs look like A-503 or A-1001 (A- followed by 3 or 4 digits). Ask for an ID if absent. Never invent an ID.',
       parameters: {
         type: 'object',
         properties: { orderId: { type: 'string' } },

@@ -11,6 +11,8 @@
     "test": "node --test test/*.test.mjs",
     "evaluate": "node src/evaluate.mjs",
     "demo:ai": "node src/cli.mjs --ollama",
-    "test:exercise": "node --test exercises/returns.test.mjs"
+    "test:exercise": "node --test exercises/returns.test.mjs",
+    "demo:cloud": "node --env-file-if-exists=.env src/cli.mjs --cloud",
+    "evaluate:cloud": "node --env-file-if-exists=.env src/evaluate.mjs --cloud"
   }
 }

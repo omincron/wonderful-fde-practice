@@ -1,3 +1,5 @@
 node_modules
 .git
 output
+.env
+DEMO_SCRIPT.md
