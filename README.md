@@ -2,11 +2,12 @@
 
 ## My work on this project
 
-Built on the Zone01 starter (original instructions below, in Greek). Synthetic data, **mock mode only**: these results prove the plumbing, not the quality of a real LLM.
+Built on the Zone01 starter (original instructions below, in Greek). Synthetic data only. Results are labelled by mode: **mock** (fixed rules; proves the plumbing) and **live** (a real LLM on Groq's free tier; one run is not a quality guarantee).
 
 - **Discovery:** scoped a vague "automate everything" request to an order-status pilot. See [CUSTOMER_BRIEF.md](CUSTOMER_BRIEF.md).
 - **Business rule:** implemented `returnEligibility` (7/7 exercise tests), stricter than the reference.
-- **Evaluation:** added cases that failed (12/14), found that the agent silently dropped a second order ID, fixed it with a hard limit of 3 orders per message, and corrected an AI-written keyword change that created false refund tickets. Now 16/16; see [reports/](reports/).
+- **Evaluation:** added cases that failed (12/14), found that the agent silently dropped a second order ID, fixed it with a hard limit of 3 orders per message, and corrected an AI-written keyword change that created false refund tickets. Mock: 17/17; see [reports/](reports/).
+- **Live LLM:** added a cloud mode (`openai/gpt-oss-120b` on Groq). First live run 12/16; the failures led to an ID-format fix and a business decision (refunds without an order ID ask for it first). Now 16/17, and one case was not repeatable between runs.
 - **Operations:** CI runs unit tests, exercise tests and evaluation on every push; Docker verified locally. See [RUNBOOK.md](RUNBOOK.md).
 - **Notes, findings and what AI did vs what I did:** [INTERVIEW_NOTES.md](INTERVIEW_NOTES.md).
 
